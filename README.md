@@ -1,5 +1,8 @@
 # Gradle Python Plugin
 
+[![Test](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Run Python scripts from Gradle with isolated virtual environments and optional dependency installation.
 
 ## Highlights
