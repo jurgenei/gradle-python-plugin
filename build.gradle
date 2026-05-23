@@ -1,0 +1,31 @@
+plugins {
+    id 'java-gradle-plugin'
+}
+
+group = 'name.jurgenei.gradle'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation gradleTestKit()
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+}
+
+gradlePlugin {
+    plugins {
+        pythonRunner {
+            id = 'name.jurgenei.gradle.python'
+            implementationClass = 'name.jurgenei.gradle.python.PythonRunnerPlugin'
+            displayName = 'Python Runner Plugin'
+            description = 'Run Python scripts with per-project virtual environment and requirements caching.'
+        }
+    }
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
