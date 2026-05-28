@@ -1,5 +1,7 @@
 # Gradle Python Plugin
 
+![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
+
 [![Test](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 

@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PythonRunnerTaskTest {
 
-    private final String pythonExecutable = Files.exists(new File("/usr/bin/python3").toPath()) ? "/usr/bin/python3" : "python3";
+    private final String pythonExecutable = System.getenv().getOrDefault("PYTHON_EXECUTABLE", "python3");
 
     @Test
     void should_register_python_runner_task_from_plugin() {
