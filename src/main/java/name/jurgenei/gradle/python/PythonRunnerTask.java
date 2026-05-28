@@ -4,6 +4,7 @@ import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.Optional;
 import org.gradle.api.tasks.TaskAction;
 
@@ -77,12 +78,16 @@ public class PythonRunnerTask extends DefaultTask {
 
     private File resolveWorkDir() {
         if (workDir != null) {
-            workDir.mkdirs();
+            if (!workDir.exists() && !workDir.mkdirs()) {
+                throw new GradleException("Failed to create workDir: " + workDir.getAbsolutePath());
+            }
             return workDir;
         }
         File parent = script.getParentFile();
         if (parent != null) {
-            parent.mkdirs();
+            if (!parent.exists() && !parent.mkdirs()) {
+                throw new GradleException("Failed to create script parent directory: " + parent.getAbsolutePath());
+            }
             return parent;
         }
         return getProject().getProjectDir();
@@ -231,10 +236,20 @@ public class PythonRunnerTask extends DefaultTask {
      *
      * @return working directory or {@code null} when default resolution is used
      */
-    @Optional
-    @Input
+    @Internal
     public File getWorkDir() {
         return workDir;
+    }
+
+    /**
+     * Returns the configured working directory path for incremental input tracking.
+     *
+     * @return absolute path of configured workDir, or {@code null} when unset
+     */
+    @Optional
+    @Input
+    public String getWorkDirPath() {
+        return workDir == null ? null : workDir.getAbsolutePath();
     }
 
     /**
@@ -254,7 +269,7 @@ public class PythonRunnerTask extends DefaultTask {
     @Optional
     @Input
     public List<String> getArgs() {
-        return args;
+        return new ArrayList<>(args);
     }
 
     /**
