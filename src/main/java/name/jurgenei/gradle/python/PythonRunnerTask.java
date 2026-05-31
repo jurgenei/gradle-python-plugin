@@ -2,11 +2,7 @@ package name.jurgenei.gradle.python;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.Optional;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,11 +32,17 @@ import java.util.concurrent.Future;
  *   <li>Runs the configured script and fails the task on non-zero exit code.</li>
  * </ul>
  */
+@CacheableTask
 public class PythonRunnerTask extends DefaultTask {
 
     private File workDir;
+
+    @PathSensitive(PathSensitivity.RELATIVE)
     private File script;
+
+    @PathSensitive(PathSensitivity.RELATIVE)
     private File requirements;
+
     private List<String> args = new ArrayList<>();
     private String pythonExecutable = "/usr/bin/python3";
 
