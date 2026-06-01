@@ -1,5 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'com.gradle.plugin-publish' version '2.1.1'
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
@@ -22,12 +23,16 @@ dependencies {
 }
 
 gradlePlugin {
+    website = 'https://github.com/jurgenei/gradle-python-plugin'
+    vcsUrl = 'https://github.com/jurgenei/gradle-python-plugin.git'
+
     plugins {
         pythonRunner {
             id = 'name.jurgenei.gradle.python'
             implementationClass = 'name.jurgenei.gradle.python.PythonRunnerPlugin'
             displayName = 'Python Runner Plugin'
             description = 'Run Python scripts with per-project virtual environment and requirements caching.'
+            tags = ['python', 'virtualenv', 'automation', 'script-runner']
         }
     }
 }
