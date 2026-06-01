@@ -156,8 +156,7 @@ public class PythonRunnerTask extends DefaultTask {
     }
 
     private ProcessOutput readProcessOutput(Process process) throws Exception {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        try {
+        try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
             Future<String> stdoutFuture = executor.submit(streamReader(process.getInputStream()));
             Future<String> stderrFuture = executor.submit(streamReader(process.getErrorStream()));
 
@@ -166,8 +165,6 @@ public class PythonRunnerTask extends DefaultTask {
             return new ProcessOutput(stdout, stderr);
         } catch (ExecutionException e) {
             throw new GradleException("Failed to read process output", e.getCause());
-        } finally {
-            executor.shutdownNow();
         }
     }
 
@@ -233,15 +230,6 @@ public class PythonRunnerTask extends DefaultTask {
         this.requirements = requirements;
     }
 
-    /**
-     * Returns the working directory used for command execution and venv storage.
-     *
-     * @return working directory or {@code null} when default resolution is used
-     */
-    @Internal
-    public File getWorkDir() {
-        return workDir;
-    }
 
     /**
      * Returns the configured working directory path for incremental input tracking.
