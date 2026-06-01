@@ -1,5 +1,6 @@
 plugins {
     id 'java-gradle-plugin'
+    id 'jacoco'
     id 'maven-publish'
     id 'signing'
     id 'org.owasp.dependencycheck' version '10.0.3'
@@ -8,7 +9,7 @@ plugins {
 }
 
 group = 'name.jurgenei.gradle'
-version = '0.1.0'
+version = '0.1.1'
 
 repositories {
     mavenCentral()
@@ -127,5 +128,47 @@ tasks.register('allSecurityChecks') {
 
 tasks.withType(Test).configureEach {
     useJUnitPlatform()
+    finalizedBy tasks.named('jacocoTestReport')
+}
+
+jacoco {
+    toolVersion = '0.8.12'
+}
+
+tasks.named('jacocoTestReport') {
+    dependsOn tasks.named('test')
+    classDirectories.setFrom(sourceSets.main.output.classesDirs)
+    sourceDirectories.setFrom(sourceSets.main.allSource.srcDirs)
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+tasks.named('jacocoTestCoverageVerification') {
+    dependsOn tasks.named('jacocoTestReport')
+    classDirectories.setFrom(sourceSets.main.output.classesDirs)
+    sourceDirectories.setFrom(sourceSets.main.allSource.srcDirs)
+    violationRules {
+        rule {
+            element = 'BUNDLE'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.0
+            }
+        }
+    }
+}
+
+tasks.register('coverage') {
+    group = 'verification'
+    description = 'Runs tests, generates JaCoCo report, and verifies minimum coverage threshold.'
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('jacocoTestCoverageVerification')
 }
 
