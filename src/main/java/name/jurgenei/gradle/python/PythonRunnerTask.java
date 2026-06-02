@@ -47,6 +47,12 @@ public class PythonRunnerTask extends DefaultTask {
     private String pythonExecutable = "/usr/bin/python3";
 
     /**
+     * Creates the task instance.
+     */
+    public PythonRunnerTask() {
+    }
+
+    /**
      * Task entry point that prepares the environment and executes the script.
      *
      * @throws Exception if environment setup or script execution fails

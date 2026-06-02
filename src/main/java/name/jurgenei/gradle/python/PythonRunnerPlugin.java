@@ -12,6 +12,12 @@ import org.gradle.api.Project;
 public class PythonRunnerPlugin implements Plugin<Project> {
 
     /**
+     * Creates the plugin instance.
+     */
+    public PythonRunnerPlugin() {
+    }
+
+    /**
      * Registers the {@code PythonRunnerTask} task in the target project.
      *
      * @param project Gradle project where the task is registered
