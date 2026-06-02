@@ -1,6 +1,7 @@
 plugins {
     id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '2.1.1'
+    id 'jacoco'
     id 'maven-publish'
     id 'signing'
     id 'org.owasp.dependencycheck' version '10.0.3'
@@ -162,6 +163,51 @@ tasks.named('jacocoTestCoverageVerification') {
                 counter = 'LINE'
                 value = 'COVEREDRATIO'
                 minimum = 0.0
+            }
+        }
+    }
+}
+
+tasks.register('coverage') {
+    group = 'verification'
+    description = 'Runs tests, generates JaCoCo report, and verifies minimum coverage threshold.'
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('jacocoTestCoverageVerification')
+}
+
+jacoco {
+    toolVersion = '0.8.12'
+}
+
+tasks.named('test') {
+    finalizedBy tasks.named('jacocoTestReport')
+}
+
+tasks.named('jacocoTestReport') {
+    dependsOn tasks.named('test')
+    classDirectories.setFrom(files(sourceSets.main.output.classesDirs))
+    sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+tasks.named('jacocoTestCoverageVerification') {
+    dependsOn tasks.named('jacocoTestReport')
+    classDirectories.setFrom(files(sourceSets.main.output.classesDirs))
+    sourceDirectories.setFrom(files(sourceSets.main.allSource.srcDirs))
+    violationRules {
+        rule {
+            element = 'BUNDLE'
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.20
             }
         }
     }
