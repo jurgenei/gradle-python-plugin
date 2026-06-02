@@ -4,6 +4,8 @@
 
 [![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.python?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.python)
 [![Test](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
+[![Coverage CI](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/coverage.yml)
+[![Coverage](https://codecov.io/gh/jurgenei/gradle-python-plugin/branch/main/graph/badge.svg)](https://codecov.io/gh/jurgenei/gradle-python-plugin)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Run Python scripts from Gradle with isolated virtual environments and optional dependency installation.

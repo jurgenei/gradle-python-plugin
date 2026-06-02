@@ -2,11 +2,7 @@ package name.jurgenei.gradle.python;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.GradleException;
-import org.gradle.api.tasks.Input;
-import org.gradle.api.tasks.InputFile;
-import org.gradle.api.tasks.Internal;
-import org.gradle.api.tasks.Optional;
-import org.gradle.api.tasks.TaskAction;
+import org.gradle.api.tasks.*;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -36,11 +32,17 @@ import java.util.concurrent.Future;
  *   <li>Runs the configured script and fails the task on non-zero exit code.</li>
  * </ul>
  */
+@CacheableTask
 public class PythonRunnerTask extends DefaultTask {
 
     private File workDir;
+
+    @PathSensitive(PathSensitivity.RELATIVE)
     private File script;
+
+    @PathSensitive(PathSensitivity.RELATIVE)
     private File requirements;
+
     private List<String> args = new ArrayList<>();
     private String pythonExecutable = "/usr/bin/python3";
 
@@ -154,8 +156,7 @@ public class PythonRunnerTask extends DefaultTask {
     }
 
     private ProcessOutput readProcessOutput(Process process) throws Exception {
-        ExecutorService executor = Executors.newFixedThreadPool(2);
-        try {
+        try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
             Future<String> stdoutFuture = executor.submit(streamReader(process.getInputStream()));
             Future<String> stderrFuture = executor.submit(streamReader(process.getErrorStream()));
 
@@ -164,8 +165,6 @@ public class PythonRunnerTask extends DefaultTask {
             return new ProcessOutput(stdout, stderr);
         } catch (ExecutionException e) {
             throw new GradleException("Failed to read process output", e.getCause());
-        } finally {
-            executor.shutdownNow();
         }
     }
 
@@ -231,15 +230,6 @@ public class PythonRunnerTask extends DefaultTask {
         this.requirements = requirements;
     }
 
-    /**
-     * Returns the working directory used for command execution and venv storage.
-     *
-     * @return working directory or {@code null} when default resolution is used
-     */
-    @Internal
-    public File getWorkDir() {
-        return workDir;
-    }
 
     /**
      * Returns the configured working directory path for incremental input tracking.
