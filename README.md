@@ -2,6 +2,7 @@
 
 ![Conformance](https://img.shields.io/badge/Conformance-Check--All%20Passing-brightgreen)
 
+[![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.python?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.python)
 [![Test](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -19,6 +20,7 @@ Run Python scripts from Gradle with isolated virtual environments and optional d
 - Plugin ID: `name.jurgenei.gradle.python`
 - Java package: `name.jurgenei.gradle.python`
 - Registered task: `PythonRunnerTask`
+- Plugin Portal page: https://plugins.gradle.org/plugin/name.jurgenei.gradle.python
 
 ## Requirements
 
