@@ -4,13 +4,29 @@
 
 [![Plugin Portal](https://img.shields.io/gradle-plugin-portal/v/name.jurgenei.gradle.python?label=Plugin%20Portal)](https://plugins.gradle.org/plugin/name.jurgenei.gradle.python)
 [![Build and Test](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
+[![JUnit Report](https://img.shields.io/badge/JUnit-Report-blue?logo=githubactions)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/test.yml)
 [![Coverage CI](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/coverage.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/coverage.yml)
-[![Coverage](https://codecov.io/gh/jurgenei/gradle-python-plugin/graph/badge.svg)](https://codecov.io/gh/jurgenei/gradle-python-plugin)
+[![CodeQL](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/codeql.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/codeql.yml)
+[![Dependency Check](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/dependency-check.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/dependency-check.yml)
+[![SpotBugs Security](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/spotbugs-security.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/spotbugs-security.yml)
+[![Checkstyle](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/checkstyle.yml/badge.svg)](https://github.com/jurgenei/gradle-python-plugin/actions/workflows/checkstyle.yml)
+[![Dependabot](https://img.shields.io/badge/dependabot-enabled-025E8C?logo=dependabot)](https://github.com/jurgenei/gradle-python-plugin/security/dependabot)
+[![Coverage](https://codecov.io/gh/jurgenei/gradle-python-plugin/graph/badge.svg?branch=main)](https://codecov.io/gh/jurgenei/gradle-python-plugin)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/java-21+-green.svg)](https://www.oracle.com/java/)
-[![Gradle](https://img.shields.io/badge/gradle-8+-blue.svg)](https://gradle.org/)
+[![Gradle](https://img.shields.io/badge/gradle-9.5+-blue.svg)](https://gradle.org/)
 
 Run Python scripts from Gradle with isolated virtual environments and optional dependency installation.
+
+## Position in XIR spine
+
+- **Problem solved**: orchestrate Python-based processing steps inside reproducible Gradle pipelines.
+- **Relation to XIR**: supporting execution layer for observation/derivation tasks in mixed-language stacks.
+- **Why it matters**: keeps structured-knowledge workflows deterministic across language boundaries.
+
+```text
+Structured Knowledge -> XIR -> Observation -> Derivation -> Knowledge -> Applications
+```
 
 ## Highlights
 
